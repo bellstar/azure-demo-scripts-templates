@@ -759,7 +759,10 @@
                                             "addressPrefix": "[parameters('vnet').subnets.bastion.addressPrefix]",
                                             "networkSecurityGroup": {
                                                 "id": "[parameters('nsgIds').value.bastion]"
-                                            }
+                                            },
+                                            "delegations": [],
+                                            "privateEndpointNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "Enabled"
                                         }
                                     }
                                 ],
@@ -2318,7 +2321,8 @@
                             "name": "[parameters('bastion').ipAddressName]",
                             "location": "[parameters('location')]",
                             "sku": {
-                                "name": "Standard"
+                                "name": "Standard",
+                                "tier": "Regional"
                             },
                             "properties": {
                                 "publicIPAllocationMethod": "Static"

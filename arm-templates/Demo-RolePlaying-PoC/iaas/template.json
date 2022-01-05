@@ -585,6 +585,37 @@
                                         }
                                     },
                                     {
+                                        "name": "AllowBastionLoadBalancerInbound",
+                                        "properties": {
+                                            "direction": "Inbound",
+                                            "priority": 220,
+                                            "access": "Allow",
+                                            "sourceAddressPrefix": "AzureLoadBalancer",
+                                            "sourcePortRange": "*",
+                                            "destinationAddressPrefix": "*",
+                                            "destinationPortRange": "443",
+                                            "protocol": "Tcp",
+                                            "description": "Allow the Bastion load balancer connections."
+                                        }
+                                    },
+                                    {
+                                        "name": "AllowBastionHostCommunicationInbound",
+                                        "properties": {
+                                            "direction": "Inbound",
+                                            "priority": 230,
+                                            "access": "Allow",
+                                            "sourceAddressPrefix": "VirtualNetwork",
+                                            "sourcePortRange": "*",
+                                            "destinationAddressPrefix": "VirtualNetwork",
+                                            "destinationPortRanges": [
+                                                "8080",
+                                                "5701"
+                                            ],
+                                            "protocol": "*",
+                                            "description": "Allow the Bastion host communication connections."
+                                        }
+                                    },
+                                    {
                                         "name": "DenyAllInbound",
                                         "properties": {
                                             "direction": "Inbound",
@@ -610,7 +641,7 @@
                                                 "3389",
                                                 "22"
                                             ],
-                                            "protocol": "Tcp",
+                                            "protocol": "*",
                                             "description": "Allow the RDP connection to the virtual machines within the virtual network."
                                         }
                                     },
@@ -627,8 +658,38 @@
                                             "protocol": "Tcp",
                                             "description": "Allow the Bastion requirement connections."
                                         }
-                                    }
-                                ]   
+                                    },
+                                    {
+                                        "name": "AllowBastionCommunicationOutBound",
+                                        "properties": {
+                                            "direction": "Outbound",
+                                            "priority": 220,
+                                            "access": "Allow",
+                                            "sourceAddressPrefix": "VirtualNetwork",
+                                            "sourcePortRange": "*",
+                                            "destinationAddressPrefix": "VirtualNetwork",
+                                            "destinationPortRanges": [
+                                                "8080",
+                                                "5701"
+                                            ],
+                                            "protocol": "*",
+                                            "description": "Allow the Bastion requirement data plane connections."
+                                        }
+                                    },
+                                    {
+                                        "name": "AllowBastionGuestSessionOutBound",
+                                        "properties": {
+                                            "direction": "Outbound",
+                                            "priority": 230,
+                                            "access": "Allow",
+                                            "sourceAddressPrefix": "*",
+                                            "sourcePortRange": "*",
+                                            "destinationAddressPrefix": "Internet",
+                                            "destinationPortRange": "80",
+                                            "protocol": "*",
+                                            "description": "Allow the Bastion requirement internet connections."
+                                        }
+                                    }                                ]   
                             }
                         }
                     ],

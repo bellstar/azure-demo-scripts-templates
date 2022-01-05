@@ -590,7 +590,7 @@
                                             "direction": "Inbound",
                                             "priority": 220,
                                             "access": "Allow",
-                                            "sourceAddressPrefix": "AzureLoadBlancer",
+                                            "sourceAddressPrefix": "AzureLoadBalancer",
                                             "sourcePortRange": "*",
                                             "destinationAddressPrefix": "*",
                                             "destinationPortRange": "443",
@@ -820,10 +820,7 @@
                                             "addressPrefix": "[parameters('vnet').subnets.bastion.addressPrefix]",
                                             "networkSecurityGroup": {
                                                 "id": "[parameters('nsgIds').value.bastion]"
-                                            },
-                                            "delegations": [],
-                                            "privateEndpointNetworkPolicies": "Enabled",
-                                            "privateLinkServiceNetworkPolicies": "Enabled"
+                                            }
                                         }
                                     }
                                 ],
@@ -2382,8 +2379,7 @@
                             "name": "[parameters('bastion').ipAddressName]",
                             "location": "[parameters('location')]",
                             "sku": {
-                                "name": "Standard",
-                                "tier": "Regional"
+                                "name": "Standard"
                             },
                             "properties": {
                                 "publicIPAllocationMethod": "Static"
